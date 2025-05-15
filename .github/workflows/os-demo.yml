@@ -1,0 +1,29 @@
+name: 'AWS Access Demo'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  aws_access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: eu-north-1a
+          role-to-assume: "arn:aws:iam::208182293447:role/Git-OS-Demo"
+          role-session-name: OIDCSession
+
+      - run: aws sts get-caller-identity
+        shell: bash
+
+      - run: aws s3 ls s3://github-demo-bucket-123456 
+        shell: bash
+          
