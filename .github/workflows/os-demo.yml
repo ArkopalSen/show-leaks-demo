@@ -17,7 +17,6 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: eu-north-1a
           role-to-assume: "arn:aws:iam::208182293447:role/Git-OS-Demo"
           role-session-name: OIDCSession
 
